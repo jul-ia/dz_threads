@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace dz1_threads
 {
@@ -10,6 +10,13 @@ namespace dz1_threads
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(70, 30);
+
+            int n = 20;
+
+            for (int i = 0; i < n; i++)
+                new Thread(new Matrix(i*2 + 10, 30).move).Start();
+            
             Console.ReadLine();
         }
     }
