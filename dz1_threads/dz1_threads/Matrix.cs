@@ -15,7 +15,7 @@ namespace dz1_threads
         {
             rand = new Random((int)DateTime.Now.Ticks);
             col = c;
-            max = n-4;
+            max = n-3;
         }
 
         private char GetChar()
@@ -32,14 +32,14 @@ namespace dz1_threads
             {
                 count = rand.Next(2, 5);
                 length = 0;
-                Thread.Sleep(rand.Next(10, 2000));
+                Thread.Sleep(rand.Next(100, 2500));
                 for(int i = 0; i < max; i++)
                 {
                     lock (locker)
                     {
-                        Console.CursorTop = i-length;
+                        Console.CursorTop = 0;
                         Console.ForegroundColor = ConsoleColor.Black;
-                        for(int j = 0; j <= i; j++)
+                        for(int j = i; j > 0; j--)
                         {
                             Console.CursorLeft = col;
                             Console.WriteLine(".");
@@ -50,7 +50,7 @@ namespace dz1_threads
                         else if (length == count)
                             count = 0;
 
-                        if (max - i < length)
+                        if (length > max - 1 - i)
                             length--;
 
                         Console.CursorLeft = i - length + 1;
