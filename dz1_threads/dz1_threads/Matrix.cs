@@ -13,9 +13,9 @@ namespace dz1_threads
 
         public Matrix(int c, int n)
         {
-            rand = new Random((int)DateTime.Now.Second);
+            rand = new Random((int)DateTime.Now.Ticks);
             col = c;
-            max = n-2;
+            max = n-4;
         }
 
         private char GetChar()
@@ -30,9 +30,9 @@ namespace dz1_threads
 
             while (true)
             {
-                count = rand.Next(2, 7);
+                count = rand.Next(2, 5);
                 length = 0;
-                Thread.Sleep(rand.Next(5, 100));
+                Thread.Sleep(rand.Next(10, 2000));
                 for(int i = 0; i < max; i++)
                 {
                     lock (locker)
@@ -55,7 +55,7 @@ namespace dz1_threads
 
                         Console.CursorLeft = i - length + 1;
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        for (int j = 0; j < length-1; j++)
+                        for (int j = 0; j < length-2; j++)
                         {
                             Console.CursorLeft = col;
                             Console.WriteLine(GetChar());
@@ -74,7 +74,7 @@ namespace dz1_threads
                             Console.WriteLine(GetChar());   
                         }
 
-                        Thread.Sleep(10);
+                        Thread.Sleep(15);
                     }
                 }
             }

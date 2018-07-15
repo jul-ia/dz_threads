@@ -12,10 +12,10 @@ namespace dz1_threads
         {
             Console.SetWindowSize(70, 30);
 
-            int n = 20;
+            int n = 25;
 
             for (int i = 0; i < n; i++)
-                new Thread(new Matrix(i*2 + 10, 30).move).Start();
+                new Thread(new Matrix(i*2 + 7, 30).move).Start();
             
             Console.ReadLine();
         }
