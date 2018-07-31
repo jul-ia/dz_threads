@@ -15,7 +15,7 @@ namespace dz1_threads
         {
             rand = new Random((int)DateTime.Now.Ticks);
             col = c;
-            max = n-3;
+            max = n;
         }
 
         private char GetChar()
@@ -30,7 +30,7 @@ namespace dz1_threads
 
             while (true)
             {
-                count = rand.Next(2, 5);
+                count = rand.Next(3, 7);
                 length = 0;
                 Thread.Sleep(rand.Next(100, 2500));
                 for(int i = 0; i < max; i++)
@@ -74,7 +74,7 @@ namespace dz1_threads
                             Console.WriteLine(GetChar());   
                         }
 
-                        Thread.Sleep(15);
+                        Thread.Sleep(10);
                     }
                 }
             }
