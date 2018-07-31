@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace dz2_threads
+namespace thread3_myMatrix
 {
     class Matrix
     {
         Random rand;
-        const string s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/*-+=?><@#$%^&\\|";
+        const char sign = '*';
         int col;
         int max;
         static readonly object locker = new object();
@@ -23,11 +23,6 @@ namespace dz2_threads
             f = true;
         }
 
-        private char GetChar()
-        {
-            return s.ToCharArray()[rand.Next(0, s.Length)];
-        }
-
         public void move()
         {
             int length;
@@ -35,19 +30,19 @@ namespace dz2_threads
 
             while (true)
             {
-                count = rand.Next(3, 6);
+                count = rand.Next(2, 6);
                 length = 0;
-                Thread.Sleep(rand.Next(50, 3000));
+                Thread.Sleep(rand.Next(100, 5000));
                 for (int i = 0; i < max; i++)
                 {
                     lock (locker)
                     {
-                        Console.CursorTop = i - length;
+                        Console.CursorTop = i-length;
                         Console.ForegroundColor = ConsoleColor.Black;
-                        for (int j = i; j > i - length; j--)
+                        for (int j = i; j > i-length; j--)
                         {
                             Console.CursorLeft = col;
-                            Console.WriteLine(".");
+                            Console.WriteLine("*");
                         }
 
                         if (length < count)
@@ -64,24 +59,31 @@ namespace dz2_threads
                             f = false;
                         }
                         Console.CursorLeft = i - length + 1;
-                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                        for (int j = 0; j < length - 2; j++)
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        for (int j = 0; j < length-3; j++)
                         {
                             Console.CursorLeft = col;
-                            Console.WriteLine(GetChar());
+                            Console.WriteLine(sign);
+                        }
+                      
+                        if (length >= 3)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.CursorLeft = col;
+                            Console.WriteLine(sign);
                         }
 
                         if (length >= 2)
                         {
-                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
                             Console.CursorLeft = col;
-                            Console.WriteLine(GetChar());
+                            Console.WriteLine(sign);
                         }
                         if (length >= 1)
                         {
-                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.CursorLeft = col;
-                            Console.WriteLine(GetChar());
+                            Console.WriteLine(sign);
                         }
                         Thread.Sleep(10);
                     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace dz2_threads
+namespace thread3_myMatrix
 {
     class Program
     {
@@ -12,11 +12,11 @@ namespace dz2_threads
         {
             Console.SetWindowSize(60, 30);
 
-            int n = 20;
+            int n = 15;
             Matrix m;
             for (int i = 0; i < n; i++)
             {
-                m = new Matrix(i * 3, 30);
+                m = new Matrix(i * 4, 30);
                 new Thread(m.move).Start();
             }
             Console.ReadLine();
